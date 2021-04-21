@@ -2,6 +2,7 @@ import "./App.css";
 import React,{useState, useEffect}from "react";
 import fire from "./fire";
 import Login from "./login";
+import Hero from "./Hero";
 
 
 
@@ -20,63 +21,63 @@ const App=()=>{
   
 }
 
-const clearErrors=()=>{
-  SetEmailError('');
-  SetpasswordError('');
+  const clearErrors=()=>{
+    SetEmailError('');
+    SetpasswordError('');
 }
 
 
-const handlelogin=()=>{
-  clearErrors();
-  fire
-  .auth()
-  .signInWithEmailandPassword(email,password)
-  .catch((err)=>{
-    switch(err.code){
-      case "auth/invalid-email":
-      case "auth/user-disabled":
-        case "auth/user-not-found":
-          SetEmailError(err.message);
-          break
-        case "auth/wrong-password":
-          SetpasswordError(err.message);
-          break;
+  const handlelogin=()=>{
+    clearErrors();
+    fire
+       .auth()
+       .signInWithEmailandPassword(email,password)
+       .catch((err)=>{
+         switch(err.code){
+            case "auth/invalid-email":
+            case "auth/user-disabled":
+            case "auth/user-not-found":
+              SetEmailError(err.message);
+             break
+            case "auth/wrong-password":
+              SetpasswordError(err.message);
+             break;
     }
 
   })
 
 };
 
-const handleSignup=()=>{
-  clearErrors();
-  fire
-  .auth()
-  .createUserWithEmailandPassword(email,password)
-  .catch((err)=>{
-    switch(err.code){
-      case "auth/email-already-in-use":
-      case "auth/invalid-email":
-          SetEmailError(err.message);
-          break
-        case "auth/weak-password":
-          SetpasswordError(err.message);
-          break;
+  const handleSignup=()=>{
+    clearErrors();
+    fire
+      .auth()
+      .createUserWithEmailandPassword(email,password)
+      .catch((err)=>{
+        switch(err.code){
+          case "auth/email-already-in-use":
+          case "auth/invalid-email":
+            SetEmailError(err.message);
+            break
+          case "auth/weak-password":
+            SetpasswordError(err.message);
+            break;
     }
 
   })
 
 };
-const handlelogout=()=>{
-  fire.auth.signOut();
+  const handlelogout=()=>{
+    fire.auth.signOut();
 }
  
- const authlistener=()=>{
-   fire.auth().onAuthStateChanged(user=>{
-     if(user){
-       clearInputs();
-       setUser(user);
-      }else{
-       setUser("");
+  const authlistener=()=>{
+    fire.auth().onAuthStateChanged(user=>{
+      if(user){
+        clearInputs();
+        setUser(user);
+       }else{
+        setUser("");
       }
     });
   };
@@ -86,19 +87,23 @@ const handlelogout=()=>{
   },[])
 
  return(
+
   <div className="App">
-   <h1>helloworld</h1>
-   <Login email={email} 
-   SetEmail={SetEmail} 
-   password={password} 
-   Setpassword={Setpassword} 
-   handlelogin={handlelogin} 
-   handleSignup={handleSignup}
-   userAccount={userAccount}
-   SetUserAccount={SetUserAccount}
-   emailError={emailError} 
-   passwordError={passwordError}
+    {user ? (
+      <Hero handlelogout={handlelogout}/>
+    ) :(
+        <Login email={email} 
+        SetEmail={SetEmail} 
+        password={password} 
+        Setpassword={Setpassword} 
+        handlelogin={handlelogin} 
+        handleSignup={handleSignup}
+        userAccount={userAccount}
+        SetUserAccount={SetUserAccount}
+        emailError={emailError} 
+        passwordError={passwordError}
     />
+    )}
   </div>
  );
 };
