@@ -1,48 +1,66 @@
 import "./App.css";
 import React,{useState, useEffect}from "react";
-import fire from "./fire";
+import authentication from "./fire";
 import Login from "./login";
-import Hero from "./Hero";
+import Grocery from "./Grocery";
 
 
 
 
 const App=()=>{
-  const[user,setUser]=useState("");
-  const[email,SetEmail]=useState("");
-  const[emailError,SetEmailError]=useState("");
-  const[password,Setpassword]=useState("");
-  const[passwordError,SetpasswordError]=useState("");
+  const[user,Set_Users]=useState("");
+
   const[userAccount,SetUserAccount]=useState(false);
 
-  const clearInputs=()=>{
-     SetEmail('');
-     Setpassword('');
+  const[User_email,Set_UserEmail]=useState("");
+
+  const[passwordError,Incorrect_password]=useState("");
+
+  const[False_Email,Incorrect_Email]=useState("");
+
+  const[User_password,Set_password]=useState("");
+  
+  
 
   
-}
  
 
-  const clearErrors=()=>{
-    SetEmailError('');
-    SetpasswordError('');
+  const Detect_UserError=()=>{
+
+    Incorrect_Email('');
+
+    Incorrect_password('');
+}
+
+
+
+
+const Detect_UserInput=()=>{
+
+  Set_UserEmail('');
+
+  Set_password('');
+
 }
   
 
-  const handlelogin=()=>{
-    clearErrors();
-    fire
+  const login_func=()=>{
+
+    Detect_UserError();
+
+    authentication
+
        .auth()
-       .signInWithEmailandPassword(email,password)
+       .signInWithEmailandPassword(User_email,User_password)
        .catch((err)=>{
          switch(err.code){
             case "auth/invalid-email":
             case "auth/user-disabled":
             case "auth/user-not-found":
-              SetEmailError(err.message);
+              Incorrect_Email(err.message);
              break
             case "auth/wrong-password":
-              SetpasswordError(err.message);
+              Incorrect_password(err.message);
              break;
     }
 
@@ -50,36 +68,45 @@ const App=()=>{
 
 };
 
-  const handleSignup = () => {
-    clearErrors();
-    fire
+  const Signup_func = () => {
+
+    Detect_UserInput();
+    authentication
+
     .auth()
-    .createUserWithEmailAndPassword(email,password)
+    .createUserWithEmailAndPassword(User_email,User_password)
+
     .catch((err)=>{
       switch(err.code){
       case "auth/email-already-in-use":
       case "auth/invalid-email":
-        SetEmailError(err.message);
+        Incorrect_Email(err.message);
         break
       case "auth/weak-password":
-        SetpasswordError(err.message);
+        Incorrect_password(err.message);
         break;
     }
 
+  
   })
 
 };
-const handlelogout=()=>{
-  fire.auth.signOut();
+
+const logout_func=()=>{
+
+  authentication.auth.signOut();
+
 }
  
 const authlistener=()=>{
-  fire.auth().onAuthStateChanged(user=>{
+
+  authentication.auth().onAuthStateChanged(user=>{
+
     if(user){
-      clearInputs();
-      setUser(user);
+      Detect_UserInput();
+      Set_Users(user);
      }else{
-      setUser("");
+      Set_Users("");
       }
     });
   };
@@ -92,18 +119,29 @@ const authlistener=()=>{
 
   <div className="App">
     {user ? (
-      <Hero handlelogout={handlelogout}/>
+      <Grocery logout_func={logout_func}/>
     ) :(
-        <Login email={email} 
-        SetEmail={SetEmail} 
-        password={password} 
-        Setpassword={Setpassword} 
-        handlelogin={handlelogin} 
-        handleSignup={handleSignup}
-        userAccount={userAccount}
-        SetUserAccount={SetUserAccount}
-        emailError={emailError} 
+        <Login 
+        User_email={User_email} 
+
+        Set_UserEmail={Set_UserEmail}
+
+        User_password={User_password} 
+
+        login_func={login_func} 
+
+        Set_password={Set_password} 
+
         passwordError={passwordError}
+
+        Signup_func={Signup_func}
+
+        False_Email={False_Email} 
+
+        userAccount={userAccount}
+
+        SetUserAccount={SetUserAccount}
+        
     />
     )}
   </div>

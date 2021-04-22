@@ -9,7 +9,7 @@ import firebase from 'firebase';
     appId: "1:956053049390:web:48af8116812e2ad5704fbf"
 };
 
-const fire =firebase.initializeApp(firebaseConfig);
+const authentication =firebase.initializeApp(firebaseConfig);
 
-export default fire;
+export default authentication;
 
