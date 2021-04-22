@@ -6,26 +6,28 @@ import Hero from "./Hero";
 
 
 
+
 const App=()=>{
-  const{user,setUser}=useState('');
-  const[email,SetEmail]=useState('');
-  const{emailError,SetEmailError}=useState('');
-  const{password,Setpassword}=useState('');
-  const{passwordError,SetpasswordError}=useState('');
-  const{userAccount,SetUserAccount}=useState(false);
+  const[user,setUser]=useState("");
+  const[email,SetEmail]=useState("");
+  const[emailError,SetEmailError]=useState("");
+  const[password,Setpassword]=useState("");
+  const[passwordError,SetpasswordError]=useState("");
+  const[userAccount,SetUserAccount]=useState(false);
 
   const clearInputs=()=>{
-    SetEmail('');
-    Setpassword('');
+     SetEmail('');
+     Setpassword('');
 
   
 }
+ 
 
   const clearErrors=()=>{
     SetEmailError('');
     SetpasswordError('');
 }
-
+  
 
   const handlelogin=()=>{
     clearErrors();
@@ -48,36 +50,36 @@ const App=()=>{
 
 };
 
-  const handleSignup=()=>{
+  const handleSignup = () => {
     clearErrors();
     fire
-      .auth()
-      .createUserWithEmailandPassword(email,password)
-      .catch((err)=>{
-        switch(err.code){
-          case "auth/email-already-in-use":
-          case "auth/invalid-email":
-            SetEmailError(err.message);
-            break
-          case "auth/weak-password":
-            SetpasswordError(err.message);
-            break;
+    .auth()
+    .createUserWithEmailAndPassword(email,password)
+    .catch((err)=>{
+      switch(err.code){
+      case "auth/email-already-in-use":
+      case "auth/invalid-email":
+        SetEmailError(err.message);
+        break
+      case "auth/weak-password":
+        SetpasswordError(err.message);
+        break;
     }
 
   })
 
 };
-  const handlelogout=()=>{
-    fire.auth.signOut();
+const handlelogout=()=>{
+  fire.auth.signOut();
 }
  
-  const authlistener=()=>{
-    fire.auth().onAuthStateChanged(user=>{
-      if(user){
-        clearInputs();
-        setUser(user);
-       }else{
-        setUser("");
+const authlistener=()=>{
+  fire.auth().onAuthStateChanged(user=>{
+    if(user){
+      clearInputs();
+      setUser(user);
+     }else{
+      setUser("");
       }
     });
   };

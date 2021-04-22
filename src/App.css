@@ -16,6 +16,23 @@ button {
   background: #603bbb;
   cursor: pointer;
 }
+.wave-btn {
+  color: #fff;
+  text-decoration: none;
+  border: 3px solid #fff;
+  padding: 5px 30px;
+  font-size: 22px;
+  font-weight: 600;
+  font-family: "Noto Sans";
+  line-height: 52px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  transition: all 1s;
+}
 
 .login {
   width: 100%;
