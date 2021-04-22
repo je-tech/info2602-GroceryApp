@@ -1,7 +1,7 @@
 import "./App.css";
 import React,{useState, useEffect}from "react";
 import authentication from "./fire";
-import Login from "./login";
+import Login_page from "./login";
 import Grocery from "./Grocery";
 
 
@@ -10,11 +10,11 @@ import Grocery from "./Grocery";
 const App=()=>{
   const[user,Set_Users]=useState("");
 
-  const[userAccount,SetUserAccount]=useState(false);
+  const[User_Account,Set_UserAccount]=useState(false);
 
   const[User_email,Set_UserEmail]=useState("");
 
-  const[passwordError,Incorrect_password]=useState("");
+  const[Password_Error,Incorrect_password]=useState("");
 
   const[False_Email,Incorrect_Email]=useState("");
 
@@ -52,15 +52,20 @@ const Detect_UserInput=()=>{
 
        .auth()
        .signInWithEmailandPassword(User_email,User_password)
-       .catch((err)=>{
-         switch(err.code){
+       .catch((error)=>{
+         switch(error.code){
             case "auth/invalid-email":
+
             case "auth/user-disabled":
+
             case "auth/user-not-found":
-              Incorrect_Email(err.message);
+
+              Incorrect_Email(error.message);
              break
+
             case "auth/wrong-password":
-              Incorrect_password(err.message);
+
+              Incorrect_password(error.message);
              break;
     }
 
@@ -94,7 +99,7 @@ const Detect_UserInput=()=>{
 
 const logout_func=()=>{
 
-  authentication.auth.signOut();
+  authentication.auth().signOut();
 
 }
  
@@ -121,7 +126,7 @@ const authlistener=()=>{
     {user ? (
       <Grocery logout_func={logout_func}/>
     ) :(
-        <Login 
+        <Login_page 
         User_email={User_email} 
 
         Set_UserEmail={Set_UserEmail}
@@ -132,15 +137,15 @@ const authlistener=()=>{
 
         Set_password={Set_password} 
 
-        passwordError={passwordError}
+        Password_Error={Password_Error}
 
         Signup_func={Signup_func}
 
         False_Email={False_Email} 
 
-        userAccount={userAccount}
+        User_Account={User_Account}
 
-        SetUserAccount={SetUserAccount}
+        Set_UserAccount={Set_UserAccount}
         
     />
     )}

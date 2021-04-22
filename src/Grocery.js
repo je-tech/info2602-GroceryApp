@@ -1,14 +1,17 @@
 import React from 'react';
 const Grocery=(logout_func)=>{
     return(
-        <section className="hero">
+        <section className="Grocery">
             <nav>
                 <h2>The Grocery List</h2>
-                <button> Add item</button>
-                <button>Add recipe</button>
-                <button onClick={logout_func}>logout</button>
+                <button type="button" class="btn btn-default waves-effect waves-light"> Add item</button>
+                <button type="button" class="btn btn-default waves-effect waves-light">Add recipe</button>
+                <button  type="button" class="btn btn-default waves-effect waves-light" onClick={logout_func}>logout</button>
 
             </nav>
+            <body>
+                <h1>Welcome</h1>
+            </body>
         </section>
     )
 }
