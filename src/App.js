@@ -3,6 +3,8 @@ import React,{useState, useEffect}from "react";
 import authentication from "./fire";
 import Login_page from "./login";
 import Grocery from "./Grocery";
+import './index.css';
+
 
 
 
@@ -19,12 +21,9 @@ const App=()=>{
   const[False_Email,Incorrect_Email]=useState("");
 
   const[User_password,Set_password]=useState("");
-  
-  
 
   
  
-
   const Detect_UserError=()=>{
 
     Incorrect_Email('');
@@ -115,16 +114,20 @@ const authlistener=()=>{
       }
     });
   };
+
+ 
   useEffect(()=>{
     authlistener();
 
   },[])
 
+  
+
  return(
 
   <div className="App">
     {user ? (
-      <Grocery logout_func={logout_func}/>
+      <Grocery logout_func={logout_func} />
     ) :(
         <Login_page 
         User_email={User_email} 

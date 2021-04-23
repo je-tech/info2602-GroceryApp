@@ -2,6 +2,7 @@ import React from 'react';
 const Grocery=(logout_func)=>{
     return(
         <section className="Grocery">
+            
             <nav>
                 <h2>The Grocery List</h2>
                 <button type="button" class="btn btn-default waves-effect waves-light"> Add item</button>
@@ -10,9 +11,13 @@ const Grocery=(logout_func)=>{
 
             </nav>
             <body>
-                <h1>Welcome</h1>
+                
+                
             </body>
+
         </section>
+        
+        
     )
 }
 
