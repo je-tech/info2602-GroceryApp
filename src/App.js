@@ -4,6 +4,8 @@ import authentication from "./fire";
 import Login_page from "./login";
 import Grocery from "./Grocery";
 import './index.css';
+import{BrowserRouter as Router,Route,Link,NavLink,Switch}from "react-router-dom"
+import Additem from './Additem';
 
 
 
@@ -21,6 +23,7 @@ const App=()=>{
   const[False_Email,Incorrect_Email]=useState("");
 
   const[User_password,Set_password]=useState("");
+  
 
   
  
@@ -30,6 +33,7 @@ const App=()=>{
 
     Incorrect_password('');
 }
+
 
 
 
@@ -114,6 +118,7 @@ const authlistener=()=>{
       }
     });
   };
+  
 
  
   useEffect(()=>{
@@ -125,9 +130,15 @@ const authlistener=()=>{
 
  return(
 
+
   <div className="App">
+   
     {user ? (
-      <Grocery logout_func={logout_func} />
+      
+      <Grocery logout_func={logout_func}   />
+      
+    
+      
     ) :(
         <Login_page 
         User_email={User_email} 
