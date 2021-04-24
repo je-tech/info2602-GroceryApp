@@ -24,12 +24,12 @@ const Grocery=({logout_func})=>{
                     <NavLink exact activeClassName="active" to="/chicken"><button type="button"  class="btn btn-default waves-effect waves-light">ADD Item </button></NavLink>
                     
 
-                    <hr/>
+                    
                     <Switch>
                     <Route path="/Additem" component={Additem}></Route>
                     <Route path="/chicken" component={chick}></Route>
                    
-                    <Button onClick={chick} to="/chicken">Click Me</Button>
+                   
                     
                     </Switch>
                     
