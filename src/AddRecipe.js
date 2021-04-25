@@ -42,7 +42,7 @@ const AddRecipe=()=>{
       }
     
     return(<div>
-      <h3>Add Recipe </h3>
+      <h3>Find Recipes </h3>
       <form  onSubmit={reqSearch}  className="AppForm"  >
       <input className="searchRecipe" type="text" value={search}  onChange={Searchitem} />
     <button   class="search-btn waves-effect waves-light" type="submit"> Search</button>
